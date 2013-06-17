@@ -13,3 +13,4 @@ spec/test.log
 .rvmrc
 .bundle
 Gemfile.lock
+.ruby-version

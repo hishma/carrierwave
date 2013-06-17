@@ -241,11 +241,25 @@ module CarrierWave
       end
 
       def full_filename(for_file)
-        [version_name, super(for_file)].compact.join('_')
+        if append_version_name
+          parent_name = super(for_file)
+          ext         = File.extname(parent_name)
+          base_name   = parent_name.chomp(ext)
+          [base_name, version_name].compact.join('_') + ext
+        else
+          [version_name, super(for_file)].compact.join('_')
+        end
       end
 
       def full_original_filename
-        [version_name, super].compact.join('_')
+        if append_version_name
+          parent_name = super
+          ext         = File.extname(parent_name)
+          base_name   = parent_name.chomp(ext)
+          [base_name, version_name].compact.join('_') + ext
+        else
+          [version_name, super].compact.join('_')
+        end
       end
 
       def cache_versions!(new_file)

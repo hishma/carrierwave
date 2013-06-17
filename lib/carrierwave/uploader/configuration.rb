@@ -21,6 +21,7 @@ module CarrierWave
         add_config :move_to_cache
         add_config :move_to_store
         add_config :remove_previously_stored_files_after_update
+        add_config :append_version_name
 
         # fog
         add_config :fog_attributes
@@ -75,7 +76,7 @@ module CarrierWave
           _storage
         end
         alias_method :storage=, :storage
-
+        
         def add_config(name)
           class_eval <<-RUBY, __FILE__, __LINE__ + 1
             def self.#{name}(value=nil)
@@ -143,6 +144,7 @@ module CarrierWave
             config.base_path = CarrierWave.base_path
             config.enable_processing = true
             config.ensure_multipart_form = true
+            config.append_version_name = false
           end
         end
       end
