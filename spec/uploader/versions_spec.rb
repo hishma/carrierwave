@@ -193,6 +193,15 @@ describe CarrierWave::Uploader do
         @uploader.file.exists?.should be_true
         @uploader.thumb.file.exists?.should be_true
       end
+      
+      context "when append_version_name is true" do
+        it "should append the version name" do
+          @uploader.thumb.append_version_name = true
+          @uploader.cache!(File.open(file_path('test.jpg')))
+          @uploader.thumb.store_path.should == 'uploads/test_thumb.jpg'
+          @uploader.thumb.store_path('kebab.png').should == 'uploads/kebab_thumb.png'
+        end
+      end
 
       it "should cache the files based on the parent" do
         CarrierWave.should_receive(:generate_cache_id).once

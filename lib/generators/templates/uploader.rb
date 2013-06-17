@@ -47,5 +47,10 @@ class <%= class_name %>Uploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+  
+  # Append the version_name in version filenames:
+  # By default, the verson_name is prepended.
+  #   e.g., use 'basename_thumb.jpg' instead of 'thumb_basename.jpg'.
+  # append_version_name false
 
 end
